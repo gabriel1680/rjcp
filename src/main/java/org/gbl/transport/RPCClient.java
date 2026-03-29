@@ -1,11 +1,9 @@
 package org.gbl.transport;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.gbl.protocol.MessageType;
 import org.gbl.protocol.NetworkProtocol;
-import org.gbl.protocol.rjcp.RJCP;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
