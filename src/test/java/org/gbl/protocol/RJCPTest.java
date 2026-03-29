@@ -1,5 +1,6 @@
 package org.gbl.protocol;
 
+import org.gbl.protocol.rjcp.RJCP;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +23,7 @@ class RJCPTest {
         protocol = new RJCP();
     }
 
-    private static void assertMessage(RJCPMessage message, int version, MessageType type,
+    private static void assertMessage(RPCMessage message, int version, MessageType type,
                                       String data) {
         assertThat(message).isNotNull();
         assertThat(message.version()).isEqualTo((byte) version);
@@ -67,7 +68,7 @@ class RJCPTest {
     }
 
     @Test
-    void send() {
+    void send() throws IOException {
         byte version = 1;
         var type = MessageType.ERROR;
         byte[] data = "Hello".getBytes(StandardCharsets.UTF_8);
@@ -83,7 +84,7 @@ class RJCPTest {
     }
 
     @Test
-    void send_and_receive() {
+    void send_and_receive() throws IOException {
         var out = new ByteArrayOutputStream();
         byte[] payload = "Hello".getBytes(StandardCharsets.UTF_8);
         var type = MessageType.MESSAGE;
