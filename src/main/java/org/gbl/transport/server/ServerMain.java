@@ -1,9 +1,8 @@
-package org.gbl;
+package org.gbl.transport.server;
 
 import org.apache.log4j.BasicConfigurator;
 import org.gbl.protocol.rjcp.RJCP;
 import org.gbl.application.DummyHandler;
-import org.gbl.transport.server.RPCServer;
 
 public class ServerMain {
     public static void main(String[] args) {

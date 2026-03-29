@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
+// TODO: configure timeouts and create pool
 public class RPCClient implements AutoCloseable {
 
     private static final Logger LOG = LogManager.getLogger(RPCClient.class);
