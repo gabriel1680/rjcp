@@ -1,4 +1,4 @@
-package org.gbl.transport;
+package org.gbl.transport.server;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

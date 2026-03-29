@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 import org.gbl.protocol.MessageType;
 import org.gbl.protocol.NetworkProtocol;
 import org.gbl.protocol.RPCMessage;
-import org.gbl.transport.MessageHandler;
+import org.gbl.transport.server.MessageHandler;
 
 import java.io.IOException;
 import java.io.OutputStream;

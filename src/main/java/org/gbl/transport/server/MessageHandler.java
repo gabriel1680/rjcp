@@ -1,4 +1,4 @@
-package org.gbl.transport;
+package org.gbl.transport.server;
 
 import org.gbl.protocol.NetworkProtocol;
 import org.gbl.protocol.RPCMessage;
