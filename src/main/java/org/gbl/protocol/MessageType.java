@@ -16,17 +16,16 @@ public enum MessageType {
         return code;
     }
 
-    private static final MessageType[] LOOKUP = new MessageType[256];
+    private static final MessageType[] LOOKUP_TABLE = new MessageType[256];
 
     static {
-        for (MessageType t : values()) {
-            LOOKUP[t.code() & 0xFF] = t;
+        for (var type : values()) {
+            LOOKUP_TABLE[type.code() & 0xFF] = type;
         }
     }
 
     public static MessageType from(byte code) {
-        // O(1)
-        MessageType type = LOOKUP[code & 0xFF];
+        final var type = LOOKUP_TABLE[code & 0xFF]; // O(1)
         if (type == null) {
             throw new IllegalArgumentException("Unknown type: " + code);
         }
