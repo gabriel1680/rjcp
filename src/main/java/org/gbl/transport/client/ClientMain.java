@@ -16,8 +16,8 @@ public class ClientMain {
         final var address = new InetSocketAddress("localhost", 8080);
         try (var client = new RPCClient(connectionFactory, address)) {
             client.ping();
-            final var bytes = client.sendMessage("Hello!");
-            System.out.println("Server response:" + new String(bytes, StandardCharsets.UTF_8));
+            final var response = client.sendMessage("Hello!");
+            System.out.println("Server response:" + new String(response.data(), StandardCharsets.UTF_8));
         }
         System.out.println("request ended");
     }

@@ -43,21 +43,21 @@ public class RPCClient implements AutoCloseable {
         }
     }
 
-    public byte[] sendMessage(String text) {
+    public RPCMessage sendMessage(String text) {
         connect();
         try {
             LOG.debug("Sending message: " + text);
             connection.send(RPCMessage.message(text.getBytes(StandardCharsets.UTF_8)));
             final var message = connection.receive();
             LOG.debug("Message received. Type:" + message.type());
-            return message.data();
+            return message;
         } catch (IOException e) {
             LOG.error("Failed to send or receive message from server");
             throw new RuntimeException(e);
         }
     }
 
-    public void ping() {
+    public RPCMessage ping() {
         try {
             connect();
             connection.send(RPCMessage.ping());
@@ -67,6 +67,7 @@ public class RPCClient implements AutoCloseable {
                 throw new RuntimeException("Invalid response, expected PONG");
             }
             LOG.debug("PONG received");
+            return response;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
