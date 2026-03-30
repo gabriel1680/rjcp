@@ -2,27 +2,24 @@ package org.gbl.application;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.gbl.protocol.MessageType;
-import org.gbl.protocol.NetworkProtocol;
 import org.gbl.protocol.RPCMessage;
 import org.gbl.transport.server.MessageHandler;
+import org.gbl.transport.connection.RCPConnection;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
-public class DummyHandler implements MessageHandler {
+public class BasicHandler implements MessageHandler {
 
-    private static final Logger LOG = LogManager.getLogger(DummyHandler.class);
+    private static final Logger LOG = LogManager.getLogger(BasicHandler.class);
 
     @Override
-    public void handle(NetworkProtocol protocol, RPCMessage message, OutputStream out) throws IOException {
+    public void handle(RPCMessage message, RCPConnection connection) throws IOException {
         switch (message.type()) {
             case PING -> {
                 try {
                     LOG.debug("PING received");
-                    protocol.send(out, MessageType.PONG, new byte[0]);
-                    out.flush();
+                    connection.send(RPCMessage.pong());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -30,12 +27,12 @@ public class DummyHandler implements MessageHandler {
             case MESSAGE -> {
                 final var text = new String(message.data(), StandardCharsets.UTF_8);
                 LOG.debug("MESSAGE: " + text);
-                protocol.send(out, MessageType.MESSAGE, "ACK");
+                connection.send(RPCMessage.message("ACK".getBytes(StandardCharsets.UTF_8)));
             }
             case PONG -> LOG.warn("PONG received (unexpected)");
-            case ERROR -> LOG.error("ERROR: " + new String(message.data(),
-                                                           StandardCharsets.UTF_8));
-            default -> protocol.send(out, MessageType.ERROR, "Unknown message type");
+            case ERROR -> LOG.error("ERROR: " + new String(message.data(), StandardCharsets.UTF_8));
+            default ->
+                    connection.send(RPCMessage.error("Unknown message type".getBytes(StandardCharsets.UTF_8)));
         }
     }
 }
