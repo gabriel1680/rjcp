@@ -68,7 +68,7 @@ public class IntegrationTest {
     }
 
     @Test
-    void on_message_should_ack() throws IOException {
+    void on_message_should_ack() {
         final var response = client.sendMessage("Hi!");
         assertThat(response.type()).isEqualTo(MessageType.MESSAGE);
         assertThat(new String(response.data(), StandardCharsets.UTF_8)).isEqualTo("ACK");
