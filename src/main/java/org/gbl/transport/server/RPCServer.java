@@ -69,7 +69,7 @@ public class RPCServer {
                 handler.handle(message, connection);
             }
         } catch (EOFException e) {
-            LOG.info("Client disconnected: " + socket.getInetAddress() + socket.getPort());
+            LOG.info("Client disconnected: " + socket.getInetAddress() + ":" + socket.getPort());
         } catch (Exception e) {
             LOG.error("Error with client: " + socket, e);
         }

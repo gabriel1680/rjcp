@@ -10,4 +10,6 @@ public interface RCPConnection extends AutoCloseable {
     RPCMessage receive() throws IOException;
 
     void close() throws IOException;
+
+    void flush() throws IOException;
 }

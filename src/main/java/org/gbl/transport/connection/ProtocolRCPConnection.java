@@ -38,4 +38,9 @@ public class ProtocolRCPConnection implements RCPConnection {
         in.close();
         out.close();
     }
+
+    @Override
+    public void flush() throws IOException {
+        out.flush();
+    }
 }

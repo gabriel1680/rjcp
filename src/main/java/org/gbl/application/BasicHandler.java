@@ -28,6 +28,7 @@ public class BasicHandler implements MessageHandler {
                 final var text = new String(message.data(), StandardCharsets.UTF_8);
                 LOG.debug("MESSAGE: " + text);
                 connection.send(RPCMessage.message("ACK".getBytes(StandardCharsets.UTF_8)));
+                connection.flush(); // in case the protocol is not in the AUTO flush mode
             }
             case PONG -> LOG.warn("PONG received (unexpected)");
             case ERROR -> LOG.error("ERROR: " + new String(message.data(), StandardCharsets.UTF_8));
