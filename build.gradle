@@ -22,3 +22,17 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+tasks.register("runClient", JavaExec) {
+    group = "application"
+    description = "Run ClientMain"
+    classpath = sourceSets["main"].runtimeClasspath
+    mainClass.set("org.gbl.transport.client.ClientMain")
+}
+
+tasks.register("runServer", JavaExec) {
+    group = "application"
+    description = "Run ServerMain"
+    classpath = sourceSets["main"].runtimeClasspath
+    mainClass.set("org.gbl.transport.server.ServerMain")
+}
