@@ -1,6 +1,6 @@
 package org.gbl;
 
-import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.helpers.LogLog;
 import org.gbl.application.BasicHandler;
 import org.gbl.protocol.MessageType;
 import org.gbl.protocol.rjcp.RJCP;
@@ -23,7 +23,7 @@ public class IntegrationTest {
 
     @BeforeAll
     static void beforeAll() {
-        BasicConfigurator.configure();
+        LogLog.setQuietMode(true);
     }
 
     private CountDownLatch countDownLatch;
