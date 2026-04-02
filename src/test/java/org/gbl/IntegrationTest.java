@@ -2,7 +2,7 @@ package org.gbl;
 
 import org.apache.log4j.helpers.LogLog;
 import org.gbl.application.BasicHandler;
-import org.gbl.protocol.RPCMessageType;
+import org.gbl.transport.message.RPCMessageType;
 import org.gbl.protocol.rjcp.RJCP;
 import org.gbl.transport.client.RPCClient;
 import org.gbl.transport.connection.ProtocolRCPConnectionFactory;

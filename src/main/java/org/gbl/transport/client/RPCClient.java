@@ -2,8 +2,8 @@ package org.gbl.transport.client;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.gbl.protocol.RPCMessageType;
-import org.gbl.protocol.RPCMessage;
+import org.gbl.transport.message.RPCMessageType;
+import org.gbl.transport.message.RPCMessage;
 import org.gbl.transport.connection.RCPConnection;
 import org.gbl.transport.connection.RCPConnectionFactory;
 

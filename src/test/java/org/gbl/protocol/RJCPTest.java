@@ -1,6 +1,8 @@
 package org.gbl.protocol;
 
 import org.gbl.protocol.rjcp.RJCP;
+import org.gbl.transport.message.RPCMessage;
+import org.gbl.transport.message.RPCMessageType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,8 @@
 package org.gbl.protocol;
 
+import org.gbl.transport.message.RPCMessage;
+import org.gbl.transport.message.RPCMessageType;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;

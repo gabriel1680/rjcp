@@ -1,4 +1,4 @@
-package org.gbl.protocol;
+package org.gbl.transport.message;
 
 public record RPCMessage(double version, RPCMessageType type, byte[] data) {
 

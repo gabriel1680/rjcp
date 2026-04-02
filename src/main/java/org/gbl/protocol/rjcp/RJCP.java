@@ -1,8 +1,8 @@
 package org.gbl.protocol.rjcp;
 
-import org.gbl.protocol.RPCMessageType;
+import org.gbl.transport.message.RPCMessageType;
 import org.gbl.protocol.NetworkProtocol;
-import org.gbl.protocol.RPCMessage;
+import org.gbl.transport.message.RPCMessage;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

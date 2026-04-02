@@ -1,6 +1,6 @@
 package org.gbl.transport.server;
 
-import org.gbl.protocol.RPCMessage;
+import org.gbl.transport.message.RPCMessage;
 import org.gbl.transport.connection.RCPConnection;
 
 import java.io.IOException;

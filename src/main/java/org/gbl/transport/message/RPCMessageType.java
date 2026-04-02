@@ -1,4 +1,4 @@
-package org.gbl.protocol;
+package org.gbl.transport.message;
 
 public enum RPCMessageType {
     PING(1),
