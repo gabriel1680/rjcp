@@ -23,7 +23,7 @@ class RJCPTest {
         protocol = new RJCP();
     }
 
-    private static void assertMessage(RPCMessage message, int version, MessageType type,
+    private static void assertMessage(RPCMessage message, int version, RPCMessageType type,
                                       String data) {
         assertThat(message).isNotNull();
         assertThat(message.version()).isEqualTo((byte) version);
@@ -50,7 +50,7 @@ class RJCPTest {
     @Test
     void receive() throws Exception {
         var version = 1;
-        var type = MessageType.MESSAGE;
+        var type = RPCMessageType.MESSAGE;
         var data = "Hello";
         var in = createInput(version, type.code(), data);
         var message = protocol.receive(in);
@@ -60,7 +60,7 @@ class RJCPTest {
     @Test
     void receive_max_length() throws Exception {
         var version = 1;
-        var type = MessageType.PONG;
+        var type = RPCMessageType.PONG;
         var data = "Hello";
         var in = createInput(version, type.code(), data);
         var message = protocol.receive(in);
@@ -70,7 +70,7 @@ class RJCPTest {
     @Test
     void send() throws IOException {
         byte version = 1;
-        var type = MessageType.ERROR;
+        var type = RPCMessageType.ERROR;
         byte[] data = "Hello".getBytes(StandardCharsets.UTF_8);
         var out = new ByteArrayOutputStream();
         protocol.send(out, type, data);
@@ -87,7 +87,7 @@ class RJCPTest {
     void send_and_receive() throws IOException {
         var out = new ByteArrayOutputStream();
         byte[] payload = "Hello".getBytes(StandardCharsets.UTF_8);
-        var type = MessageType.MESSAGE;
+        var type = RPCMessageType.MESSAGE;
         protocol.send(out, type, payload);
         var in = new ByteArrayInputStream(out.toByteArray());
         var message = protocol.receive(in);

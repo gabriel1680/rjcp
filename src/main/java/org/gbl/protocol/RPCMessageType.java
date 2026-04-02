@@ -1,6 +1,6 @@
 package org.gbl.protocol;
 
-public enum MessageType {
+public enum RPCMessageType {
     PING(1),
     PONG(2),
     MESSAGE(3),
@@ -8,7 +8,7 @@ public enum MessageType {
 
     private final byte code;
 
-    MessageType(int code) {
+    RPCMessageType(int code) {
         this.code = (byte) code;
     }
 
@@ -16,7 +16,7 @@ public enum MessageType {
         return code;
     }
 
-    private static final MessageType[] LOOKUP_TABLE = new MessageType[256];
+    private static final RPCMessageType[] LOOKUP_TABLE = new RPCMessageType[256];
 
     static {
         for (var type : values()) {
@@ -24,7 +24,7 @@ public enum MessageType {
         }
     }
 
-    public static MessageType from(byte code) {
+    public static RPCMessageType from(byte code) {
         final var type = LOOKUP_TABLE[code & 0xFF]; // O(1)
         if (type == null) {
             throw new IllegalArgumentException("Unknown type: " + code);

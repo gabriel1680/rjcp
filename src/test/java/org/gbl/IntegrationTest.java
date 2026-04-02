@@ -2,7 +2,7 @@ package org.gbl;
 
 import org.apache.log4j.helpers.LogLog;
 import org.gbl.application.BasicHandler;
-import org.gbl.protocol.MessageType;
+import org.gbl.protocol.RPCMessageType;
 import org.gbl.protocol.rjcp.RJCP;
 import org.gbl.transport.client.RPCClient;
 import org.gbl.transport.connection.ProtocolRCPConnectionFactory;
@@ -64,13 +64,13 @@ public class IntegrationTest {
     @Test
     void on_ping_should_pong() {
         final var response = client.ping();
-        assertThat(response.type()).isEqualTo(MessageType.PONG);
+        assertThat(response.type()).isEqualTo(RPCMessageType.PONG);
     }
 
     @Test
     void on_message_should_ack() {
         final var response = client.sendMessage("Hi!");
-        assertThat(response.type()).isEqualTo(MessageType.MESSAGE);
+        assertThat(response.type()).isEqualTo(RPCMessageType.MESSAGE);
         assertThat(new String(response.data(), StandardCharsets.UTF_8)).isEqualTo("ACK");
     }
 

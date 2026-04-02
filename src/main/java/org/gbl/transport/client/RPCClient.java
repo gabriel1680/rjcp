@@ -2,7 +2,7 @@ package org.gbl.transport.client;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.gbl.protocol.MessageType;
+import org.gbl.protocol.RPCMessageType;
 import org.gbl.protocol.RPCMessage;
 import org.gbl.transport.connection.RCPConnection;
 import org.gbl.transport.connection.RCPConnectionFactory;
@@ -62,7 +62,7 @@ public class RPCClient implements AutoCloseable {
             connect();
             connection.sendAndFlush(RPCMessage.ping());
             final var response = connection.receive();
-            if (response.type() != MessageType.PONG) {
+            if (response.type() != RPCMessageType.PONG) {
                 LOG.error("PING does not PONG");
                 throw new RuntimeException("Invalid response, expected PONG");
             }

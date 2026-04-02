@@ -1,6 +1,6 @@
 package org.gbl.protocol.rjcp;
 
-import org.gbl.protocol.MessageType;
+import org.gbl.protocol.RPCMessageType;
 import org.gbl.protocol.NetworkProtocol;
 import org.gbl.protocol.RPCMessage;
 
@@ -21,10 +21,10 @@ public class RJCP implements NetworkProtocol {
         int length = dataInput.readInt();
         // TODO: Fix the readNBytes - can read more or less than the given length
         byte[] data = dataInput.readNBytes(length);
-        return new RPCMessage(version, MessageType.from(type), data);
+        return new RPCMessage(version, RPCMessageType.from(type), data);
     }
 
-    public void send(OutputStream out, MessageType type, byte[] data) throws IOException {
+    public void send(OutputStream out, RPCMessageType type, byte[] data) throws IOException {
         DataOutputStream dataOut = new DataOutputStream(out);
         dataOut.writeByte(VERSION);
         dataOut.writeByte(type.code());
