@@ -18,18 +18,20 @@ public class BasicHandler implements MessageHandler {
         switch (message.type()) {
             case PING -> {
                 LOG.debug("PING received");
-                connection.send(RPCMessage.pong());
+                connection.sendAndFlush(RPCMessage.pong());
             }
             case MESSAGE -> {
                 final var text = new String(message.data(), StandardCharsets.UTF_8);
                 LOG.debug("MESSAGE: " + text);
-                connection.send(RPCMessage.message("ACK".getBytes(StandardCharsets.UTF_8)));
-                connection.flush(); // in case the protocol is not in the AUTO flush mode
+                connection.sendAndFlush(RPCMessage.message(getBytes("ACK")));
             }
             case PONG -> LOG.warn("PONG received (unexpected)");
             case ERROR -> LOG.error("ERROR: " + new String(message.data(), StandardCharsets.UTF_8));
-            default ->
-                    connection.send(RPCMessage.error("Unknown message type".getBytes(StandardCharsets.UTF_8)));
+            default -> connection.sendAndFlush(RPCMessage.error(getBytes("Unknown message type")));
         }
+    }
+
+    private static byte[] getBytes(String data) {
+        return data.getBytes(StandardCharsets.UTF_8);
     }
 }

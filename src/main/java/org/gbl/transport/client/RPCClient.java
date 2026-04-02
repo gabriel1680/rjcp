@@ -47,7 +47,7 @@ public class RPCClient implements AutoCloseable {
         connect();
         try {
             LOG.debug("Sending message: " + text);
-            connection.send(RPCMessage.message(text.getBytes(StandardCharsets.UTF_8)));
+            connection.sendAndFlush(RPCMessage.message(text.getBytes(StandardCharsets.UTF_8)));
             final var message = connection.receive();
             LOG.debug("Message received. Type:" + message.type());
             return message;
@@ -60,7 +60,7 @@ public class RPCClient implements AutoCloseable {
     public RPCMessage ping() {
         try {
             connect();
-            connection.send(RPCMessage.ping());
+            connection.sendAndFlush(RPCMessage.ping());
             final var response = connection.receive();
             if (response.type() != MessageType.PONG) {
                 LOG.error("PING does not PONG");

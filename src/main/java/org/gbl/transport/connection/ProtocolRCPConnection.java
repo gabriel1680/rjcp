@@ -24,6 +24,12 @@ public class ProtocolRCPConnection implements RCPConnection {
     }
 
     @Override
+    public void sendAndFlush(RPCMessage message) throws IOException {
+        send(message);
+        flush();
+    }
+
+    @Override
     public void send(RPCMessage message) throws IOException {
         protocol.send(out, message.type(), message.data());
     }

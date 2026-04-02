@@ -9,21 +9,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
 
 public class RJCP implements NetworkProtocol {
 
-    private final FlushMode flushMode;
-
     private static final byte VERSION = 1;
-
-    public RJCP(FlushMode flushMode) {
-        this.flushMode = flushMode;
-    }
-
-    public RJCP() {
-        this.flushMode = FlushMode.AUTO;
-    }
 
     public RPCMessage receive(InputStream in) throws IOException {
         var dataInput = new DataInputStream(in);
@@ -35,20 +24,11 @@ public class RJCP implements NetworkProtocol {
         return new RPCMessage(version, MessageType.from(type), data);
     }
 
-    public void send(OutputStream out, MessageType type, String data) throws IOException {
-        send(out, type, data.getBytes(StandardCharsets.UTF_8));
-    }
-
     public void send(OutputStream out, MessageType type, byte[] data) throws IOException {
         DataOutputStream dataOut = new DataOutputStream(out);
         dataOut.writeByte(VERSION);
         dataOut.writeByte(type.code());
         dataOut.writeInt(data.length);
         dataOut.write(data);
-        switch (flushMode) {
-            case AUTO -> dataOut.flush();
-            case MANUAL -> {
-            }
-        }
     }
 }

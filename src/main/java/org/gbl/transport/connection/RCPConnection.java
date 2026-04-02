@@ -5,6 +5,8 @@ import org.gbl.protocol.RPCMessage;
 import java.io.IOException;
 
 public interface RCPConnection extends AutoCloseable {
+    void sendAndFlush(RPCMessage message) throws IOException;
+
     void send(RPCMessage message) throws IOException;
 
     RPCMessage receive() throws IOException;
